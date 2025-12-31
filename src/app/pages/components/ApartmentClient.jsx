@@ -11,7 +11,7 @@
 'use client'
 
 import {generateId} from "@/app/global-services/utils";
-import {Box, Checkbox, FormControlLabel, TextField} from "@mui/material";
+import {Box, Button, Checkbox, FormControlLabel, TextField} from "@mui/material";
 import {useEffect, useState} from "react";
 
 const mockData = [
@@ -89,6 +89,26 @@ const ApartmentClient = () => {
         }
     }
 
+    const addApartment = () => {
+        const temp = [...apartments];//best practice is to copy the state. since we set new..
+        const apartment = {...newApartment};//the same
+        apartment.id = generateId();
+        temp.push(apartment);
+        setApartments(temp);
+        //after pushing we want to clean the new apartment state:
+        setNewApartment(
+            {
+                id: null,
+                address: "",
+                rooms: 0,
+                floor: 0,
+                type: "",
+                isCommercial: false,
+                price: 0
+            });
+
+    }
+
     //EFFECTS
     useEffect(() => {
 
@@ -107,7 +127,7 @@ const ApartmentClient = () => {
                 <h3>All Apartments: </h3>
 
 
-                {mockData.map(item => {
+                {apartments.map(item => {
 
                     return <p key={item.id}>
                         ID = {item.id} | {item.address}, {item.rooms} rooms, floor {item.floor},
@@ -180,13 +200,16 @@ const ApartmentClient = () => {
                     />
 
 
-                    <FormControlLabel control={  <Checkbox checked={newApartment.isCommercial}
-                                                           name="isCommercial"
-                                                           onChange={handleNewApartmentChanges}
+                    <FormControlLabel control={<Checkbox checked={newApartment.isCommercial}
+                                                         name="isCommercial"
+                                                         onChange={handleNewApartmentChanges}
 
 
-                    />} label="Commercial Property" />
+                    />} label="Commercial Property"/>
 
+                    <Button onClick = {addApartment}
+
+                    variant={"contained"}>Add Apartment</Button>
 
 
                 </Box>
