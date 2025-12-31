@@ -70,6 +70,9 @@ const ApartmentClient = () => {
         isCommercial: false,
         price: 0
     });
+
+    //for edit
+    const [editApartment, setEditApartment] = useState(null);
     //FUNCTIONS
 
     const handleNewApartmentChanges = (ev) => {
@@ -91,9 +94,29 @@ const ApartmentClient = () => {
         }
     }
 
+
+    const handleEditApartmentChanges = (ev) => {
+        const {name, value} = ev.target;
+        if (name !== "isCommercial") {
+            setEditApartment(previousState => {
+                return {
+                    ...previousState,//we copying all the object
+                    [name]: value//changing only the specific property
+                }
+            })
+        } else {//handling checkbox
+            setEditApartment(previousState => {
+                return {
+                    ...previousState,//we copying all the object
+                    [name]: ev.target.checked//changing only the specific property
+                }
+            })
+        }
+    }
     const addApartment = () => {
         const temp = [...apartments];//best practice is to copy the state. since we set new..
         const apartment = {...newApartment};//the same
+
         apartment.id = generateId();
         temp.push(apartment);
         setApartments(temp);
@@ -110,6 +133,23 @@ const ApartmentClient = () => {
             });
 
     }
+
+    const updateApartment = () => {
+        const temp = [...apartments];//best practice is to copy the state. since we set new..
+        const apartmentIdx= temp.findIndex(item=> editApartment.id === item.id);//getting the old data
+        console.log("edit apartment = ", editApartment)
+
+        // apartment.id = generateId();//not need here...
+
+        // temp.push(apartment);//instead to push - we updating
+        temp[apartmentIdx] = editApartment;
+        console.log("apartment = ", temp)
+        setApartments(temp);//updating the data again.
+        //after pushing we want to clear the update mode:
+        setEditApartment(null);
+
+    }
+
 
     //EFFECTS
     useEffect(() => {
@@ -141,7 +181,13 @@ const ApartmentClient = () => {
 
                     </p>
                         <Box component={"div"}>
-                            <IconButton >
+                            <IconButton
+                            onClick={()=> {
+                                console.log("hi")
+                                setEditApartment(item);
+                            }}
+                            color = "info"
+                            >
                                 <EditIcon/>
                             </IconButton>
                             <IconButton >
@@ -162,71 +208,137 @@ const ApartmentClient = () => {
         isCommercial: false,
         price: 2600
     },*/}
-                <h3>Add Apartments</h3>
-                <Box display={"flex"} flexDirection={"column"}
-                     gap={2}
-                     sx={{
-                         '& .MuiTextField-root': {
-                             width: 500
-                         },
-                         alignItems: "flex-start"
-                     }}
+                {(!editApartment) ?<><h3>Add Apartments</h3>
+                    <Box display={"flex"} flexDirection={"column"}
+                                          gap={2}
+                                          sx={{
+                                              '& .MuiTextField-root': {
+                                                  width: 500
+                                              },
+                                              alignItems: "flex-start"
+                                          }}
 
-                >
+            >
 
-                    {/*The input of mui*/}
-                    <TextField
-                        variant={"outlined"}
-                        label={"Address"}
-                        value={newApartment.address}
-                        name="address"
-                        onChange={handleNewApartmentChanges}
-
-
-                    />
-                    <TextField
-                        variant={"outlined"}
-                        label={"Price"}
-                        value={newApartment.price}
-                        name="price"
-                        onChange={handleNewApartmentChanges}
-                        type="number"
-
-                    />
-                    <TextField
-                        variant={"outlined"}
-                        label={"Rooms"}
-                        value={newApartment.rooms}
-                        name="rooms"
-                        onChange={handleNewApartmentChanges}
-                        type="number"
-
-                    />
-
-                    <TextField
-                        variant={"outlined"}
-                        label={"Floor"}
-                        value={newApartment.floor}
-                        name="floor"
-                        onChange={handleNewApartmentChanges}
-                        type="number"
-
-                    />
+                {/*The input of mui*/}
+                <TextField
+                    variant={"outlined"}
+                    label={"Address"}
+                    value={newApartment.address}
+                    name="address"
+                    onChange={handleNewApartmentChanges}
 
 
-                    <FormControlLabel control={<Checkbox checked={newApartment.isCommercial}
-                                                         name="isCommercial"
-                                                         onChange={handleNewApartmentChanges}
+                />
+                <TextField
+                    variant={"outlined"}
+                    label={"Price"}
+                    value={newApartment.price}
+                    name="price"
+                    onChange={handleNewApartmentChanges}
+                    type="number"
+
+                />
+                <TextField
+                    variant={"outlined"}
+                    label={"Rooms"}
+                    value={newApartment.rooms}
+                    name="rooms"
+                    onChange={handleNewApartmentChanges}
+                    type="number"
+
+                />
+
+                <TextField
+                    variant={"outlined"}
+                    label={"Floor"}
+                    value={newApartment.floor}
+                    name="floor"
+                    onChange={handleNewApartmentChanges}
+                    type="number"
+
+                />
 
 
-                    />} label="Commercial Property"/>
-
-                    <Button onClick={addApartment}
-
-                            variant={"contained"}>Add Apartment</Button>
+                <FormControlLabel control={<Checkbox checked={newApartment.isCommercial}
+                                                     name="isCommercial"
+                                                     onChange={handleNewApartmentChanges}
 
 
-                </Box>
+                />} label="Commercial Property"/>
+
+                <Button onClick={addApartment}
+
+                        variant={"contained"}>Add Apartment</Button>
+
+
+            </Box> </>: <><h3>Edit this apartment</h3>
+                    <Box display={"flex"} flexDirection={"column"}
+                         gap={2}
+                         sx={{
+                             '& .MuiTextField-root': {
+                                 width: 500
+                             },
+                             alignItems: "flex-start"
+                         }}
+
+                    >
+
+                        {/*The input of mui*/}
+                        <TextField
+                            variant={"outlined"}
+                            label={"Address"}
+                            value={editApartment.address}
+                            name="address"
+                            onChange={handleEditApartmentChanges}
+
+
+                        />
+                        <TextField
+                            variant={"outlined"}
+                            label={"Price"}
+                            value={editApartment.price}
+                            name="price"
+                            onChange={handleEditApartmentChanges}
+                            type="number"
+
+                        />
+                        <TextField
+                            variant={"outlined"}
+                            label={"Rooms"}
+                            value={editApartment.rooms}
+                            name="rooms"
+                            onChange={handleEditApartmentChanges}
+                            type="number"
+
+                        />
+
+                        <TextField
+                            variant={"outlined"}
+                            label={"Floor"}
+                            value={editApartment.floor}
+                            name="floor"
+                            onChange={handleEditApartmentChanges}
+                            type="number"
+
+                        />
+
+
+                        <FormControlLabel control={<Checkbox checked={editApartment.isCommercial}
+                                                             name="isCommercial"
+                                                             onChange={handleEditApartmentChanges}
+
+
+                        />} label="Commercial Property"/>
+
+                        <Button onClick={updateApartment}
+                                color = "info"
+
+                                variant={"contained"}>Update Apartment</Button>
+
+
+                    </Box> </>}
+                <p>Edit apartment = {editApartment?.address}</p>
 
             </Box>
 
