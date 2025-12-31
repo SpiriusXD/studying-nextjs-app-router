@@ -1,5 +1,7 @@
 This is some basic tutorial on Next.JS with App-Router
 
+In this branch we see a basic simple client pages
+
 -----
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
