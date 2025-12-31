@@ -81,7 +81,8 @@ const ApartmentClient = () => {
             setNewApartment(previousState => {
                 return {
                     ...previousState,//we copying all the object
-                    [name]: value//changing only the specific property
+                    [name]: type === 'number' ? Number(value) : value
+
                 }
             })
         } else {//handling checkbox
@@ -96,12 +97,13 @@ const ApartmentClient = () => {
 
 
     const handleEditApartmentChanges = (ev) => {
-        const {name, value} = ev.target;
+        const {name, value, type} = ev.target;
+        console.log("type = ")
         if (name !== "isCommercial") {
             setEditApartment(previousState => {
                 return {
                     ...previousState,//we copying all the object
-                    [name]: value//changing only the specific property
+                    [name]: type === 'number' ? Number(value) : value//changing only the specific property
                 }
             })
         } else {//handling checkbox
