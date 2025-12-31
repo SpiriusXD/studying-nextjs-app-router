@@ -15,10 +15,12 @@ export default function Docs() {
             <h2>Learning material</h2>
             <ol>
                 <li><Link href={`${pathname}/ui-understanding`}>Understanding UI and creating page.</Link></li>
+                <li><Link href={`${pathname}/crud-examples`}>Crud Examples - client (inner), server, DB</Link></li>
 
             </ol>
             <h2>Things to understand in the future </h2>
             <ol>
+                <li>Refreshing Data Management and props vs state in React</li>
                 <li>Server Component - what why how</li>
                 <li>Rest Service - what why how</li>
                 <li>Next is not SPA bu hybrid- what why how</li>
