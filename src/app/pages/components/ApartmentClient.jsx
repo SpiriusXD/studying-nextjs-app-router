@@ -98,7 +98,7 @@ const ApartmentClient = () => {
 
     const handleEditApartmentChanges = (ev) => {
         const {name, value, type} = ev.target;
-        console.log("type = ")
+
         if (name !== "isCommercial") {
             setEditApartment(previousState => {
                 return {
@@ -139,13 +139,11 @@ const ApartmentClient = () => {
     const updateApartment = () => {
         const temp = [...apartments];//best practice is to copy the state. since we set new..
         const apartmentIdx= temp.findIndex(item=> editApartment.id === item.id);//getting the old data
-        console.log("edit apartment = ", editApartment)
 
         // apartment.id = generateId();//not need here...
 
         // temp.push(apartment);//instead to push - we updating
         temp[apartmentIdx] = editApartment;
-        console.log("apartment = ", temp)
         setApartments(temp);//updating the data again.
         //after pushing we want to clear the update mode:
         setEditApartment(null);
@@ -168,6 +166,7 @@ const ApartmentClient = () => {
     }, []);
 
     console.log("apartments = ", apartments);
+
     return (
         <>
             <Box component={"div"}>
