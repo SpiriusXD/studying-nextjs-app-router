@@ -272,7 +272,7 @@ const ApartmentClient = () => {
                         variant={"contained"}>Add Apartment</Button>
 
 
-            </Box> </>: <><h3>Edit this apartment</h3>
+            </Box> </>: <><Box component={"h3"} color = "warning.main">Edit this apartment</Box>
                     <Box display={"flex"} flexDirection={"column"}
                          gap={2}
                          sx={{
@@ -338,7 +338,7 @@ const ApartmentClient = () => {
 
 
                     </Box> </>}
-                <p>Edit apartment = {editApartment?.address}</p>
+
 
             </Box>
 
