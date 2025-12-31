@@ -11,7 +11,7 @@
 'use client'
 
 import {generateId} from "@/app/global-services/utils";
-import {Box, TextField} from "@mui/material";
+import {Box, Checkbox, FormControlLabel, TextField} from "@mui/material";
 import {useEffect, useState} from "react";
 
 const mockData = [
@@ -72,15 +72,15 @@ const ApartmentClient = () => {
 
     const handleNewApartmentChanges = (ev) => {
         const {name, value} = ev.target;
-        if(name !== "isCommercial"){
-            setNewApartment(previousState=>{
+        if (name !== "isCommercial") {
+            setNewApartment(previousState => {
                 return {
                     ...previousState,//we copying all the object
                     [name]: value//changing only the specific property
                 }
             })
-        }else{//handling checkbox
-            setNewApartment(previousState=>{
+        } else {//handling checkbox
+            setNewApartment(previousState => {
                 return {
                     ...previousState,//we copying all the object
                     [name]: ev.target.checked//changing only the specific property
@@ -128,8 +128,17 @@ const ApartmentClient = () => {
         isCommercial: false,
         price: 2600
     },*/}
-                <h2>Add Apartments</h2>
-                <Box>
+                <h3>Add Apartments</h3>
+                <Box display={"flex"} flexDirection={"column"}
+                     gap={2}
+                     sx={{
+                         '& .MuiTextField-root': {
+                             width: 500
+                         },
+                         alignItems: "flex-start"
+                     }}
+
+                >
 
                     {/*The input of mui*/}
                     <TextField
@@ -139,10 +148,45 @@ const ApartmentClient = () => {
                         name="address"
                         onChange={handleNewApartmentChanges}
 
-                    >
+
+                    />
+                    <TextField
+                        variant={"outlined"}
+                        label={"Price"}
+                        value={newApartment.price}
+                        name="price"
+                        onChange={handleNewApartmentChanges}
+                        type="number"
+
+                    />
+                    <TextField
+                        variant={"outlined"}
+                        label={"Rooms"}
+                        value={newApartment.rooms}
+                        name="rooms"
+                        onChange={handleNewApartmentChanges}
+                        type="number"
+
+                    />
+
+                    <TextField
+                        variant={"outlined"}
+                        label={"Floor"}
+                        value={newApartment.floor}
+                        name="floor"
+                        onChange={handleNewApartmentChanges}
+                        type="number"
+
+                    />
 
 
-                    </TextField>
+                    <FormControlLabel control={  <Checkbox checked={newApartment.isCommercial}
+                                                           name="isCommercial"
+                                                           onChange={handleNewApartmentChanges}
+
+
+                    />} label="Commercial Property" />
+
 
 
                 </Box>
