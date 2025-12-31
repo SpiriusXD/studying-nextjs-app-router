@@ -1,111 +1,49 @@
-import Image from "next/image";
-
 import styles from "./page.module.css";
 import Link from "next/link";
 
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
+    return (
+        <div >
 
 
-    <div style = {{border: "2px solid black", width: "400px", height: "700px",
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between"
+            <div style={{
+                border: "2px solid black", width: "400px", height: "700px",
+
+                padding: 100
 
 
-    }}>
+            }}>
 
- <h1>Hello Hermelin</h1>
+                <h1>Basic Client Explanation</h1>
 
-      <h2>Home page</h2>
-
-      <a href = {"/pages/draft"} target = "_blank">Draft</a>
-      <a href = {"/pages/memory-game"} target = "_blank">
-
-        Memory Game
-      </a>
-      <Link href = {"/pages/draft"} target = "_blank">Draft</Link>
-      <Link href = {"/pages/memory-game"} target = "_blank">
-
-        Memory Game
-      </Link>
-
-        <a href = {"/pages/draft"} target = "_blank">Draft</a>
-      <a href = {"/pages/memory-game"} target = "_blank">
-
-        Memory Game
-      </a>
-      <Link href = {"/pages/draft"} target = "_blank">Draft</Link>
-      <Link href = {"/pages/memory-game"} target = "_blank">
-
-        Memory Game
-      </Link>
+                <h2>This is Home page</h2>
+                <p>In Next App Router - everything is working by the folder structure.
+                    See the "DOCS" Explanation for further</p>
+                <p>For example this page is page.js in the root, and the url for it is:
+                    http://localhost:3000/</p>
+                <p>Pay attention that you need to pass <b>only one</b> of route.js OR page.js,
+                    because if you create them both - next will confused which one to choose. </p>
 
 
+                <h3>Those are links with a html tag</h3>
 
-    </div>
-     
+                <p><a href={"/pages/draft"} target="_blank">Draft</a> |
+                    <a href={"/pages/memory-game"} target="_blank"> Memory Game
+                    </a>
+                </p>
+
+                <h3>And those are with the "Link" predefined component of next</h3>
+                <Link href={"/pages/draft"} target="_blank">Draft</Link> |
+                <Link href={"/pages/memory-game"} target="_blank"> Memory Game
+                </Link>
+ |
+                <Link href={"/pages/docs"} target="_blank"> DOCS
+                </Link>
 
 
-      {/* <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+            </div>
+
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main> */}
-    </div>
-  );
+    );
 }
