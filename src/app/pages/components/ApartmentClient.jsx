@@ -11,8 +11,10 @@
 'use client'
 
 import {generateId} from "@/app/global-services/utils";
-import {Box, Button, Checkbox, FormControlLabel, TextField} from "@mui/material";
+import {Box, Button, Checkbox, FormControlLabel, IconButton, TextField} from "@mui/material";
 import {useEffect, useState} from "react";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const mockData = [
 
@@ -129,7 +131,8 @@ const ApartmentClient = () => {
 
                 {apartments.map(item => {
 
-                    return <p key={item.id}>
+                    return <div key={item.id}>
+                    <p >
                         ID = {item.id} | {item.address}, {item.rooms} rooms, floor {item.floor},
                         type is {item.type}, <b>{item.isCommercial ? "Allowed for Commercial use" :
                         "Only for private use"}</b>,
@@ -137,6 +140,17 @@ const ApartmentClient = () => {
                         {item.price}$
 
                     </p>
+                        <Box component={"div"}>
+                            <IconButton >
+                                <EditIcon/>
+                            </IconButton>
+                            <IconButton >
+                                <DeleteIcon/>
+                            </IconButton>
+
+                        </Box>
+                        <hr/>
+                </div>
 
                 })}
                 {/*{
@@ -207,9 +221,9 @@ const ApartmentClient = () => {
 
                     />} label="Commercial Property"/>
 
-                    <Button onClick = {addApartment}
+                    <Button onClick={addApartment}
 
-                    variant={"contained"}>Add Apartment</Button>
+                            variant={"contained"}>Add Apartment</Button>
 
 
                 </Box>
