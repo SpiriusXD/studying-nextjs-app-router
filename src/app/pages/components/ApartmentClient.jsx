@@ -76,7 +76,7 @@ const ApartmentClient = () => {
     //FUNCTIONS
 
     const handleNewApartmentChanges = (ev) => {
-        const {name, value} = ev.target;
+        const {name, value, type } = ev.target;
         if (name !== "isCommercial") {
             setNewApartment(previousState => {
                 return {
@@ -150,6 +150,13 @@ const ApartmentClient = () => {
 
     }
 
+    const removeApartment = (id)=>{
+        let temp = [...apartments];
+        const idx = temp.findIndex(item=> item.id === id);
+        temp.splice(idx, 1);
+        setApartments(temp);
+    }
+
 
     //EFFECTS
     useEffect(() => {
@@ -157,6 +164,8 @@ const ApartmentClient = () => {
         setApartments(mockData);
 
     }, []);
+
+    console.log("apartments = ", apartments);
     return (
         <>
             <Box component={"div"}>
@@ -190,7 +199,8 @@ const ApartmentClient = () => {
                             >
                                 <EditIcon/>
                             </IconButton>
-                            <IconButton >
+                            <IconButton color = "warning"
+                            onClick={()=>removeApartment(item.id)}>
                                 <DeleteIcon/>
                             </IconButton>
 
