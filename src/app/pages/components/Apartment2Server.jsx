@@ -15,6 +15,7 @@ import {Box, Button, Checkbox, FormControlLabel, IconButton, TextField} from "@m
 import {useEffect, useState} from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import axios from "axios";
 
 const mockData = [
 
@@ -56,7 +57,7 @@ const mockData = [
     }
 
 ]
-const ApartmentClient = () => {
+const Apartment2Server = () => {
 
     //PROPERTIES
     const [apartments, setApartments] = useState([]);//empty on default - for preventing crushes
@@ -161,7 +162,20 @@ const ApartmentClient = () => {
     //EFFECTS
     useEffect(() => {
 
-        setApartments(mockData);
+        // setApartments(mockData);
+
+        //instead of getting the mockData, we refer to the server
+        //see we define it inside effect and than call it since it's async
+        const getData = async ()=>{
+            const res = await axios.get(`/api/apartment`);
+            //the response contains additional values
+            const data = res.data;
+            console.log("data = ", res);
+            setApartments(data);
+
+        }
+        getData();
+
 
     }, []);
 
@@ -378,4 +392,4 @@ const ApartmentClient = () => {
 
 }
 
-export default ApartmentClient;
+export default Apartment2Server;
