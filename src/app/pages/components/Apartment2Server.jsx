@@ -142,7 +142,13 @@ const Apartment2Server = () => {
   const updateApartment = async () => {
     // editApartment
 
-    axios.put(`/api/apartment`, editApartment);
+   await axios.put(`/api/apartment`, editApartment).then(res=>{
+        console.log("updated finished");
+        
+    });
+
+    // console.log("Hi updated");
+    
 
     // const temp = [...apartments];//best practice is to copy the state. since we set new..
     // const apartmentIdx = temp.findIndex(item => editApartment.id === item.id);//getting the old data
