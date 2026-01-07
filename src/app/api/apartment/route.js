@@ -79,10 +79,13 @@ export async function DELETE(req) {
     console.log("data " , id)
 
     const index = apartments.findIndex(item => item.id === id);
+    if(index < 0) return Response.json({ message: "doesn't exist" }, { status: 400 });
+
+
+
     console.log("index = ", index)
     apartments.splice(index, 1);
 
-    if(index < 0) return Response.json({ message: "doesn't exist" }, { status: 400 });
     return Response.json(true);
 
 }

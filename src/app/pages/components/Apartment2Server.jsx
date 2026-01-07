@@ -167,11 +167,12 @@ const Apartment2Server = () => {
     setEditApartment(null);
   };
 
-  const removeApartment = (id) => {
-    let temp = [...apartments];
-    const idx = temp.findIndex((item) => item.id === id);
-    temp.splice(idx, 1);
-    setApartments(temp);
+  const removeApartment = async(id) => {
+
+    await axios.delete(`/api/apartment`, {data: {id: id}});
+    //let temp = [...apartments];
+    await getData();
+    //setApartments(temp);
   };
 
   const getData = async () => {
