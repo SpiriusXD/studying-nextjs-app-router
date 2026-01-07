@@ -120,23 +120,27 @@ const Apartment2Server = () => {
       });
     }
   };
-  const addApartment = () => {
-    const temp = [...apartments]; //best practice is to copy the state. since we set new..
-    const apartment = { ...newApartment }; //the same
+  const addApartment = async() => {
 
-    apartment.id = generateId();
-    temp.push(apartment);
-    setApartments(temp);
-    //after pushing we want to clean the new apartment state:
-    setNewApartment({
-      id: null,
-      address: "",
-      rooms: 0,
-      floor: 0,
-      type: "",
-      isCommercial: false,
-      price: 0,
-    });
+    await axios.post(`/api/apartment`, newApartment);
+    await getData();
+
+    // const temp = [...apartments]; //best practice is to copy the state. since we set new..
+    // const apartment = { ...newApartment }; //the same
+
+    // apartment.id = generateId();
+    // temp.push(apartment);
+    // setApartments(temp);
+    // //after pushing we want to clean the new apartment state:
+    // setNewApartment({
+    //   id: null,
+    //   address: "",
+    //   rooms: 0,
+    //   floor: 0,
+    //   type: "",
+    //   isCommercial: false,
+    //   price: 0,
+    // });
   };
 
   const updateApartment = async () => {
