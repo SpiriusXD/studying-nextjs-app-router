@@ -6,7 +6,7 @@ export default function Draft() {
 
     const cardLength = 200;
     const [gridLength, setGridLength] = useState(3);
-    const [length, setLength] = useState(0);
+    const [length, setLength] = useState(gridLength*gridLength);
 
 
     useEffect(()=>{
