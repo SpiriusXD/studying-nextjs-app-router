@@ -1,10 +1,17 @@
-import Image from "next/image";
+'use client'
 import {Box} from "@mui/material";
+import {useEffect, useState} from "react";
 
 export default function Draft() {
 
-    const length = 9;
     const cardLength = 200;
+    const [gridLength, setGridLength] = useState(3);
+    const [length, setLength] = useState(0);
+
+
+    useEffect(()=>{
+        setLength(gridLength*gridLength);
+    }, [gridLength])
 
 
     return (
@@ -15,11 +22,15 @@ export default function Draft() {
 
             <p>First, let's show Grid of cards: </p>
 
+            <input type={"number"} placeholder={"Grid Length"} value={gridLength}
+                   onChange={(ev) => setGridLength(ev.target.value)}/>
+            <br/>
+            <br/>
             <Box component={"div"}
                  sx={{
                      display: "grid",
-                     gridTemplateColumns: "repeat(3, 1fr)",
-                     gridTemplateRows: "repeat(3, 1fr)",
+                     gridTemplateColumns: `repeat(${gridLength}, 1fr)`,
+                     gridTemplateRows: `repeat(${gridLength}, 1fr)`,
                      gap: "50px",
                      padding: 4,
                      width: "fit-content",
@@ -42,20 +53,20 @@ export default function Draft() {
                         fontSize: "6rem"
 
                     }}
-                    key = {i}>
-                    <strong>
-                        {i +1 }
-                    </strong>
+                         key={i}>
+                        <strong>
+                            {i + 1}
+                        </strong>
 
                     </Box>
                 ))}
             </Box>
 
 
-            </>
+        </>
 
 
-            );
+    );
 
 
-            }
+}
