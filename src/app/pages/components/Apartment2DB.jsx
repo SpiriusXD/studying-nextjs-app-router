@@ -130,9 +130,9 @@ const Apartment2DB = () => {
     setEditApartment(null);
   };
 
-  const removeApartment = async(id) => {
+  const removeApartment = async(_id) => {
 
-    await axios.delete(`/api/apartment`, {data: {id: id}});
+    await axios.delete(`/api/apartment-db`, {data: {_id: _id}});
     //let temp = [...apartments];
     await getData();
     //setApartments(temp);
@@ -193,7 +193,7 @@ const Apartment2DB = () => {
                 </IconButton>
                 <IconButton
                   color="warning"
-                  onClick={() => removeApartment(item.id)}
+                  onClick={() => removeApartment(item._id)}
                 >
                   <DeleteIcon />
                 </IconButton>
