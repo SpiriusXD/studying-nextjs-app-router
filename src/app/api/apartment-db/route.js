@@ -1,5 +1,12 @@
-import { getAllEntities } from "@/app/server/generic-db-service";
-import {NextResponse} from "next/server";
+import {
+    createEntity,
+    deleteEntity,
+    getAllEntities,
+    updateEntity
+} from "@/app/server/generic-db-service";
+import {
+    NextResponse
+} from "next/server";
 
 // export const apartments = [];
 
@@ -8,7 +15,7 @@ let id = 0;
 const generateId = () => {
     return id++;
 }
- 
+
 /*
 o address: string
 o rooms: number
@@ -22,7 +29,7 @@ const entityName = "apartment";
 export async function GET(req1) {
 
     const apartments = await getAllEntities(entityName);
-   
+
 
     return Response.json(apartments);
 }
@@ -30,8 +37,8 @@ export async function GET(req1) {
 export async function POST(req) {
     console.log(req.body)
     const apartment = await req.json();
-    
-    const newApartment = await createNewEn
+
+    const newApartment = await createEntity(apartment, entityName);
 
 
 
@@ -40,10 +47,10 @@ export async function POST(req) {
 }
 
 export async function PUT(req) {
-    const updatedApartment = await req.json();
+    const apartment = await req.json();
 
-    const index = apartments.findIndex(item => item.id === updatedApartment.id);
-    apartments[index] = updatedApartment;
+    const updatedApartment = await updateEntity(apartment, entityName);
+
     return Response.json(updatedApartment);
 
 }
@@ -52,17 +59,10 @@ export async function PUT(req) {
 export async function DELETE(req) {
     const reqData = await req.json();
 
-    const id = reqData.id;
-    console.log("data " , id)
+    const id = reqData._id;
 
-    const index = apartments.findIndex(item => item.id === id);
-    if(index < 0) return Response.json({ message: "doesn't exist" }, { status: 400 });
+    const result = await deleteEntity(id, entityName);
 
-
-
-    console.log("index = ", index)
-    apartments.splice(index, 1);
-
-    return Response.json(true);
+    return Response.json(result);
 
 }
