@@ -85,7 +85,7 @@ const Apartment2DB = () => {
   };
   const addApartment = async() => {
 
-    await axios.post(`/api/apartment`, newApartment);
+    await axios.post(`/api/apartment-db`, newApartment);
     await getData();
 
     // const temp = [...apartments]; //best practice is to copy the state. since we set new..
@@ -109,7 +109,7 @@ const Apartment2DB = () => {
   const updateApartment = async () => {
     // editApartment
 
-   await axios.put(`/api/apartment`, editApartment).then(res=>{
+   await axios.put(`/api/apartment-db`, editApartment).then(res=>{
         console.log("updated finished");
         
     });
