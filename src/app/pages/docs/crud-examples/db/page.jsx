@@ -1,6 +1,7 @@
 import {Box} from "@mui/material";
 import ApartmentClient from "@/app/pages/components/ApartmentClient";
 import Apartment2Server from "@/app/pages/components/Apartment2Server";
+import Apartment2DB from "@/app/pages/components/Apartment2DB";
 
 
 export const Inner=()=> {
@@ -14,7 +15,7 @@ export const Inner=()=> {
                 This data is connected to server crud <br/>
                 http://localhost:3000/api/apartment
             </p>
-            <Apartment2Server/>
+            <Apartment2DB/>
             <ol>
                 {/*<li><Link href={`${pathname}/inner`}>Demonstrate Simple inner CRUD with client fake data.</Link></li>*/}
                 {/*<li><Link href={`${pathname}/server`}>Demonstrate  CRUD to the server - but without DB</Link></li>*/}

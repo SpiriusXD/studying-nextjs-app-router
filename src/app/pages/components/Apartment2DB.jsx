@@ -24,45 +24,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 
-const mockData = [
-  {
-    id: generateId(),
-    address: "HA'Ary 5",
-    rooms: 5,
-    floor: 1,
-    type: "OLD",
-    isCommercial: false,
-    price: 2600,
-  },
-  {
-    id: generateId(),
-    address: "Shalom Alechem",
-    rooms: 2.5,
-    floor: 1,
-    type: "Villa",
-    isCommercial: false,
-    price: 3400,
-  },
-  {
-    id: generateId(),
-    address: "Jerusalem 40",
-    rooms: 12.5,
-    floor: 1,
-    type: "Complex",
-    isCommercial: false,
-    price: 8500,
-  },
-  {
-    id: generateId(),
-    address: "Tel Giborim",
-    rooms: 10,
-    floor: 2,
-    type: "Tower",
-    isCommercial: true,
-    price: 3500,
-  },
-];
-const Apartment2Server = () => {
+
+const Apartment2DB = () => {
   //PROPERTIES
   const [apartments, setApartments] = useState([]); //empty on default - for preventing crushes
 
@@ -122,7 +85,7 @@ const Apartment2Server = () => {
   };
   const addApartment = async() => {
 
-    await axios.post(`/api/apartment`, newApartment);
+    await axios.post(`/api/apartment-db`, newApartment);
     await getData();
 
     // const temp = [...apartments]; //best practice is to copy the state. since we set new..
@@ -146,7 +109,7 @@ const Apartment2Server = () => {
   const updateApartment = async () => {
     // editApartment
 
-   await axios.put(`/api/apartment`, editApartment).then(res=>{
+   await axios.put(`/api/apartment-db`, editApartment).then(res=>{
         console.log("updated finished");
         
     });
@@ -167,19 +130,18 @@ const Apartment2Server = () => {
     setEditApartment(null);
   };
 
-  const removeApartment = async(id) => {
+  const removeApartment = async(_id) => {
 
-    await axios.delete(`/api/apartment`, {data: {id: id}});
+    await axios.delete(`/api/apartment-db`, {data: {_id: _id}});
     //let temp = [...apartments];
     await getData();
     //setApartments(temp);
   };
 
   const getData = async () => {
-    const res = await axios.get(`/api/apartment`);
+    const res = await axios.get(`/api/apartment-db`);
     //the response contains additional values
     const data = res.data;
-    console.log("data = ", res);
     setApartments(data);
   };
 
@@ -231,7 +193,7 @@ const Apartment2Server = () => {
                 </IconButton>
                 <IconButton
                   color="warning"
-                  onClick={() => removeApartment(item.id)}
+                  onClick={() => removeApartment(item._id)}
                 >
                   <DeleteIcon />
                 </IconButton>
@@ -405,4 +367,4 @@ const Apartment2Server = () => {
   );
 };
 
-export default Apartment2Server;
+export default Apartment2DB;

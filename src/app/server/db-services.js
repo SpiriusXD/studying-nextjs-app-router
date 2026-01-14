@@ -1,6 +1,8 @@
+import mongoose from "mongoose";
+
 const DATABASE_NAME = "NEXTJS_APP_ROUTER";
 // const MONGO_URI = "mongodb://lingar:12345678@localhost:27017/" + DATABASE_NAME + "?authSource=admin";
-const MONGO_URI = "mongodb://localhost:27017/"
+const MONGO_URI = "mongodb://localhost:27017/studying-next-app-router"
 let cached = global.mongoose || {conn: null, promise: null};
 
 let isConnected = false;
@@ -13,7 +15,7 @@ export const connectDB2 = async () => {
     try {
         await mongoose.connect(MONGO_URI, {serverSelectionTimeoutMS: 5000});
         isConnected = true;
-        await createInitData();
+        // await createInitData();
         console.log("db connected by mongoose 222");
     } catch (e) {
         if (e.name === "MongoServerError" && e.code === 18) {
